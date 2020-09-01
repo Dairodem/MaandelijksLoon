@@ -537,7 +537,7 @@
             this.Controls.Add(this.txtLastName);
             this.Font = new System.Drawing.Font("Cambria", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Name = "FormAddWorker";
+            this.InputName = "FormAddWorker";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Werknemer Toevoegen";
             this.Load += new System.EventHandler(this.FormAddWorker_Load);

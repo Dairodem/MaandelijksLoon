@@ -17,10 +17,8 @@ namespace MaandelijksLoon
         public DateTime StartDate { get; set; }
         public double StartWage { get; set; }
         public double Wage { get; set; }
-        public double WorkHours { get; set; }
+        public int WorkHours { get; set; }
         public int Seniority { get; set; }
-
-        private bool hasCar = false;
 
         public Worker(string socialNr, string name, string gender, string iban, DateTime birthDate, DateTime startDate)
         {
@@ -30,11 +28,24 @@ namespace MaandelijksLoon
             BirthDate = birthDate;
             StartDate = startDate;
             SocialNr = socialNr;
+            Function = "Standaard";
             StartWage = 1900.00d;
             WorkHours = 38;
             Wage = StartWage;
         }
-        public string GetInfo()
+        public Worker(string socialNr, string name, string gender, string iban, DateTime birthDate, DateTime startDate, double startWage, int workHours)
+        {
+            Name = name;
+            Gender = gender;
+            Iban = iban;
+            BirthDate = birthDate;
+            StartDate = startDate;
+            SocialNr = socialNr;
+            Function = "Standaard";
+            StartWage = startWage;
+            WorkHours = workHours;
+        }
+        public virtual string GetInfo()
         {
             string info = "";
             info += $"{Name}\n" +
@@ -44,9 +55,7 @@ namespace MaandelijksLoon
                     $"{StartDate:dd MMMM yyyy}\n" +
                     $"{Function}\n" +
                     $"{WorkHours}/38\n" +
-                    $"{StartWage}\n" +
-                    $"{Wage}\n" +
-                    $"{hasCar}";
+                    $"Nee";
 
 
             return info.ToUpper();

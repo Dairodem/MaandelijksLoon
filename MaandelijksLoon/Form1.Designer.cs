@@ -35,6 +35,8 @@
             this.lblInfo = new System.Windows.Forms.Label();
             this.gbWorker = new System.Windows.Forms.GroupBox();
             this.btnChange = new System.Windows.Forms.Button();
+            this.lblInfoName = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.gbWorkersList.SuspendLayout();
             this.gbWorker.SuspendLayout();
             this.SuspendLayout();
@@ -46,7 +48,7 @@
             this.lbxWorkers.ItemHeight = 15;
             this.lbxWorkers.Location = new System.Drawing.Point(3, 17);
             this.lbxWorkers.Name = "lbxWorkers";
-            this.lbxWorkers.Size = new System.Drawing.Size(196, 214);
+            this.lbxWorkers.Size = new System.Drawing.Size(226, 214);
             this.lbxWorkers.TabIndex = 0;
             this.lbxWorkers.SelectedIndexChanged += new System.EventHandler(this.lbxWorkers_SelectedIndexChanged);
             // 
@@ -77,7 +79,7 @@
             this.gbWorkersList.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbWorkersList.Location = new System.Drawing.Point(12, 13);
             this.gbWorkersList.Name = "gbWorkersList";
-            this.gbWorkersList.Size = new System.Drawing.Size(202, 326);
+            this.gbWorkersList.Size = new System.Drawing.Size(232, 326);
             this.gbWorkersList.TabIndex = 3;
             this.gbWorkersList.TabStop = false;
             this.gbWorkersList.Text = "Werknemerslijst";
@@ -85,18 +87,20 @@
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(17, 21);
+            this.lblInfo.Location = new System.Drawing.Point(172, 18);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(56, 75);
+            this.lblInfo.Size = new System.Drawing.Size(56, 135);
             this.lblInfo.TabIndex = 4;
-            this.lblInfo.Text = "info\r\nnaam\r\ngeboorte\r\nindienst\r\n...";
+            this.lblInfo.Text = "naam\r\ngeslacht\r\ngeboorte\r\nSocialnr\r\n\r\nindienst\r\nfunctiie\r\nuren\r\nwagen\r\n";
             // 
             // gbWorker
             // 
+            this.gbWorker.Controls.Add(this.label1);
+            this.gbWorker.Controls.Add(this.lblInfoName);
             this.gbWorker.Controls.Add(this.btnChange);
             this.gbWorker.Controls.Add(this.lblInfo);
             this.gbWorker.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbWorker.Location = new System.Drawing.Point(220, 12);
+            this.gbWorker.Location = new System.Drawing.Point(250, 13);
             this.gbWorker.Name = "gbWorker";
             this.gbWorker.Size = new System.Drawing.Size(424, 327);
             this.gbWorker.TabIndex = 5;
@@ -111,6 +115,25 @@
             this.btnChange.TabIndex = 3;
             this.btnChange.Text = "Pas gegevens aan...";
             this.btnChange.UseVisualStyleBackColor = true;
+            // 
+            // lblInfoName
+            // 
+            this.lblInfoName.AutoSize = true;
+            this.lblInfoName.Location = new System.Drawing.Point(20, 18);
+            this.lblInfoName.Name = "lblInfoName";
+            this.lblInfoName.Size = new System.Drawing.Size(129, 135);
+            this.lblInfoName.TabIndex = 5;
+            this.lblInfoName.Text = "Naam\r\nGeslacht\r\nGeboortedatum\r\nRijsregisternummer\r\n\r\nDatum indiensttreding\r\nFunct" +
+    "ie\r\nTe presteren uren\r\nBedrijfswagen";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(156, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(10, 135);
+            this.label1.TabIndex = 6;
+            this.label1.Text = ":\r\n:\r\n:\r\n:\r\n\r\n:\r\n:\r\n:\r\n:\r\n";
             // 
             // Form1
             // 
@@ -140,6 +163,8 @@
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.GroupBox gbWorker;
         private System.Windows.Forms.Button btnChange;
+        private System.Windows.Forms.Label lblInfoName;
+        private System.Windows.Forms.Label label1;
     }
 }
 

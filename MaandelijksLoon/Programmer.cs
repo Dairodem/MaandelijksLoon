@@ -13,6 +13,29 @@ namespace MaandelijksLoon
         public Programmer(string socialNr, string name, string gender, string iban, DateTime birthDate, DateTime startDate, bool hasCar) : base(socialNr,name, gender,iban,birthDate,startDate)
         {
             HasCar = hasCar;
+            Function = "Programmeur";
+        }
+        public override string GetInfo()
+        {
+            string haveCar;
+            if (HasCar)
+                haveCar = "Ja";
+            else
+                haveCar = "Nee";
+
+            
+            string info = "";
+            info += $"{Name}\n" +
+                    $"{Gender}\n" +
+                    $"{BirthDate:dd MMMM yyyy}\n" +
+                    $"{SocialNr}\n\n" +
+                    $"{StartDate:dd MMMM yyyy}\n" +
+                    $"{Function}\n" +
+                    $"{WorkHours}/38\n" +
+                    $"{haveCar}";
+
+
+            return info.ToUpper();
         }
     }
 }

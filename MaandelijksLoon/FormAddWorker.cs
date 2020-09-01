@@ -23,7 +23,7 @@ namespace MaandelijksLoon
         private string[] genderArray = new string[] { "Man","Vrouw" };
         private string[] ageYears = new string[60];
 
-        public string Name;
+        public string InputName;
         public string Function;
         public string Gender;
         public string IBAN;
@@ -43,7 +43,7 @@ namespace MaandelijksLoon
         private void FormAddWorker_Load(object sender, EventArgs e)
         {
             FillYearsComboBox(cbYear, 1950, DateTime.Now.Year - 1950);
-            FillYearsComboBox(cbYearHired, DateTime.Now.Year, 10);
+            FillYearsComboBox(cbYearHired, 1950 , DateTime.Now.Year - 1948);
 
             cbFunction.DataSource = null;
             cbFunction.DataSource = new BindingSource(functionsToWages, null);
@@ -52,7 +52,7 @@ namespace MaandelijksLoon
 
             cbFunction.SelectedIndex = 0;
             cbYear.SelectedIndex = 0;
-            cbYearHired.SelectedIndex = 0;
+            cbYearHired.SelectedIndex = cbYearHired.Items.Count-2;
 
             cbGender.Items.AddRange(genderArray);
             cbGender.SelectedIndex = 0;
@@ -147,7 +147,7 @@ namespace MaandelijksLoon
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Name = txtName.Text + " " + txtLastName.Text;
+            InputName = txtName.Text + " " + txtLastName.Text;
             Function = cbFunction.Text;
             Gender = cbGender.Text;
             IBAN = "BE" + txtIban.Text;
