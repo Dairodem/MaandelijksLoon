@@ -22,8 +22,9 @@ namespace MaandelijksLoon
         private void Form1_Load(object sender, EventArgs e)
         {
             WorkersList.Add(new Worker("91.05.08-511.13", "Test Werker", "Man", "BE13-4569-8544-7251", new DateTime(1991, 05, 08), new DateTime(2007, 01, 01)));
-            WorkersList.Add(new Worker("89.10.12-187.96", "Eva Werkster", "Vrouw", "BE12-5362-2530-0031", new DateTime(1989, 10, 12), DateTime.Now));
+            WorkersList.Add(new Programmer("89.10.12-187.96", "Eva Werkster", "Vrouw", "BE12-5362-2530-0031", new DateTime(1989, 10, 12), DateTime.Now,true));
 
+            lbxWorkers.DataSource = null;
             lbxWorkers.DataSource = WorkersList;
 
         }
@@ -32,8 +33,42 @@ namespace MaandelijksLoon
         {
             FormAddWorker formAddWorker = new FormAddWorker();
 
-            formAddWorker.ShowDialog();
+            if (formAddWorker.ShowDialog() == DialogResult.OK)
+            {
+                switch (formAddWorker.Function)
+                {
+                    case "Programmeur":
+                        WorkersList.Add(new Programmer(formAddWorker.SocialNr, formAddWorker.Name, formAddWorker.Gender, formAddWorker.IBAN, formAddWorker.BirthDate, formAddWorker.StartDate, formAddWorker.HasCar));
+                        break;
+
+                    case "IT-Support":
+                        WorkersList.Add(new ITSupport(formAddWorker.SocialNr, formAddWorker.Name, formAddWorker.Gender, formAddWorker.IBAN, formAddWorker.BirthDate, formAddWorker.StartDate));
+                        break;
+
+                    case "Customer Support":
+                        WorkersList.Add(new CustSupport(formAddWorker.SocialNr, formAddWorker.Name, formAddWorker.Gender, formAddWorker.IBAN, formAddWorker.BirthDate, formAddWorker.StartDate));
+                        break;
+
+                    case "Standaard":
+                    default:
+                        WorkersList.Add(new Worker(formAddWorker.SocialNr, formAddWorker.Name, formAddWorker.Gender, formAddWorker.IBAN, formAddWorker.BirthDate, formAddWorker.StartDate));
+                        break;
+                }
+
+                lbxWorkers.DataSource = null;
+                lbxWorkers.DataSource = WorkersList;
+            }
         }
 
+        private void lbxWorkers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbxWorkers.SelectedIndex >= 0)
+            {
+                Worker worker = (Worker)lbxWorkers.SelectedItem;
+
+                lblInfo.Text = worker.GetInfo();
+
+            }
+        }
     }
 }

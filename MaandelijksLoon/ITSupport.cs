@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace MaandelijksLoon
 {
-    class ITSupport
+    class ITSupport : Support
     {
+        public ITSupport(string socialNr, string name, string gender, string iban, DateTime birthDate, DateTime startDate) : base(socialNr, name, gender, iban, birthDate, startDate)
+        {
+        }
     }
 }

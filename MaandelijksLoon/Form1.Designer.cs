@@ -41,12 +41,14 @@
             // 
             // lbxWorkers
             // 
+            this.lbxWorkers.Dock = System.Windows.Forms.DockStyle.Top;
             this.lbxWorkers.FormattingEnabled = true;
             this.lbxWorkers.ItemHeight = 15;
-            this.lbxWorkers.Location = new System.Drawing.Point(19, 20);
+            this.lbxWorkers.Location = new System.Drawing.Point(3, 17);
             this.lbxWorkers.Name = "lbxWorkers";
-            this.lbxWorkers.Size = new System.Drawing.Size(159, 214);
+            this.lbxWorkers.Size = new System.Drawing.Size(196, 214);
             this.lbxWorkers.TabIndex = 0;
+            this.lbxWorkers.SelectedIndexChanged += new System.EventHandler(this.lbxWorkers_SelectedIndexChanged);
             // 
             // btnRemove
             // 
@@ -72,7 +74,7 @@
             this.gbWorkersList.Controls.Add(this.lbxWorkers);
             this.gbWorkersList.Controls.Add(this.btnAddWorker);
             this.gbWorkersList.Controls.Add(this.btnRemove);
-            this.gbWorkersList.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbWorkersList.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbWorkersList.Location = new System.Drawing.Point(12, 13);
             this.gbWorkersList.Name = "gbWorkersList";
             this.gbWorkersList.Size = new System.Drawing.Size(202, 326);
@@ -85,7 +87,7 @@
             this.lblInfo.AutoSize = true;
             this.lblInfo.Location = new System.Drawing.Point(17, 21);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(53, 70);
+            this.lblInfo.Size = new System.Drawing.Size(56, 75);
             this.lblInfo.TabIndex = 4;
             this.lblInfo.Text = "info\r\nnaam\r\ngeboorte\r\nindienst\r\n...";
             // 
@@ -93,16 +95,17 @@
             // 
             this.gbWorker.Controls.Add(this.btnChange);
             this.gbWorker.Controls.Add(this.lblInfo);
+            this.gbWorker.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbWorker.Location = new System.Drawing.Point(220, 12);
             this.gbWorker.Name = "gbWorker";
-            this.gbWorker.Size = new System.Drawing.Size(200, 327);
+            this.gbWorker.Size = new System.Drawing.Size(424, 327);
             this.gbWorker.TabIndex = 5;
             this.gbWorker.TabStop = false;
             this.gbWorker.Text = "naam werker";
             // 
             // btnChange
             // 
-            this.btnChange.Location = new System.Drawing.Point(20, 243);
+            this.btnChange.Location = new System.Drawing.Point(6, 288);
             this.btnChange.Name = "btnChange";
             this.btnChange.Size = new System.Drawing.Size(160, 31);
             this.btnChange.TabIndex = 3;
@@ -113,7 +116,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(442, 368);
+            this.ClientSize = new System.Drawing.Size(686, 368);
             this.Controls.Add(this.gbWorker);
             this.Controls.Add(this.gbWorkersList);
             this.Font = new System.Drawing.Font("Cambria", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

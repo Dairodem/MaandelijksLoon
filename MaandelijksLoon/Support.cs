@@ -10,8 +10,6 @@ namespace MaandelijksLoon
     {
         public Support(string socialNr, string name, string gender, string iban, DateTime birthDate, DateTime startDate) : base(socialNr, name, gender, iban, birthDate, startDate )
         {
-            StartWage = 2050.00d;
-
         }
     }
 }
