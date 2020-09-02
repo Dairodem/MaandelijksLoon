@@ -8,7 +8,7 @@ namespace MaandelijksLoon
 {
     class CustSupport : Support
     {
-        public CustSupport(string socialNr, string name, string gender, string iban, DateTime birthDate, DateTime startDate) : base(socialNr, name, gender, iban, birthDate, startDate)
+        public CustSupport(string socialNr, string name, string gender, string iban, DateTime birthDate, DateTime startDate, double startWage, int workHours) : base(socialNr, name, gender, iban, birthDate, startDate, startWage, workHours)
         {
         }
     }

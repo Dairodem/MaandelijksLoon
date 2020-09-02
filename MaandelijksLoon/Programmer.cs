@@ -10,7 +10,7 @@ namespace MaandelijksLoon
     {
         public bool HasCar { get; set; } 
         
-        public Programmer(string socialNr, string name, string gender, string iban, DateTime birthDate, DateTime startDate, bool hasCar) : base(socialNr,name, gender,iban,birthDate,startDate)
+        public Programmer(string socialNr, string name, string gender, string iban, DateTime birthDate, DateTime startDate, double startWage, int workHours, bool hasCar) : base(socialNr,name, gender,iban,birthDate,startDate,startWage,workHours)
         {
             HasCar = hasCar;
             Function = "Programmeur";
@@ -23,7 +23,8 @@ namespace MaandelijksLoon
             else
                 haveCar = "Nee";
 
-            
+            Seniority = GetSeniority();
+
             string info = "";
             info += $"{Name}\n" +
                     $"{Gender}\n" +
@@ -32,7 +33,8 @@ namespace MaandelijksLoon
                     $"{StartDate:dd MMMM yyyy}\n" +
                     $"{Function}\n" +
                     $"{WorkHours}/38\n" +
-                    $"{haveCar}";
+                    $"{haveCar}\n" +
+                    $"{Seniority}";
 
 
             return info.ToUpper();

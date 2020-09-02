@@ -37,6 +37,9 @@
             this.btnChange = new System.Windows.Forms.Button();
             this.lblInfoName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblWage = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.gbWorkersList.SuspendLayout();
             this.gbWorker.SuspendLayout();
             this.SuspendLayout();
@@ -95,6 +98,9 @@
             // 
             // gbWorker
             // 
+            this.gbWorker.Controls.Add(this.label4);
+            this.gbWorker.Controls.Add(this.label3);
+            this.gbWorker.Controls.Add(this.lblWage);
             this.gbWorker.Controls.Add(this.label1);
             this.gbWorker.Controls.Add(this.lblInfoName);
             this.gbWorker.Controls.Add(this.btnChange);
@@ -135,6 +141,34 @@
             this.label1.TabIndex = 6;
             this.label1.Text = ":\r\n:\r\n:\r\n:\r\n\r\n:\r\n:\r\n:\r\n:\r\n";
             // 
+            // lblWage
+            // 
+            this.lblWage.AutoSize = true;
+            this.lblWage.Location = new System.Drawing.Point(172, 184);
+            this.lblWage.Name = "lblWage";
+            this.lblWage.Size = new System.Drawing.Size(55, 15);
+            this.lblWage.TabIndex = 7;
+            this.lblWage.Text = "startloon\r\n";
+            this.lblWage.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(20, 184);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 15);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Startloon\r\n";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(156, 184);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(10, 15);
+            this.label4.TabIndex = 9;
+            this.label4.Text = ":";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -165,6 +199,9 @@
         private System.Windows.Forms.Button btnChange;
         private System.Windows.Forms.Label lblInfoName;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblWage;
     }
 }
 
