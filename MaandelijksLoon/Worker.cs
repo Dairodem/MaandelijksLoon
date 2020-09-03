@@ -16,9 +16,10 @@ namespace MaandelijksLoon
         public DateTime BirthDate { get; set; }
         public DateTime StartDate { get; set; }
         public double StartWage { get; set; }
-        public double Wage { get; set; }
         public double Seniority { get; set; }
         public int WorkHours { get; set; }
+        public Dictionary<string, double> FullPaycheck { get; set; }
+
 
         public Worker(string socialNr, string name, string gender, string iban, DateTime birthDate, DateTime startDate, double startWage, int workHours)
         {
@@ -31,7 +32,7 @@ namespace MaandelijksLoon
             Function = "Standaard";
             WorkHours = workHours;
             StartWage = SetStartWage(startWage, workHours);
-            Seniority = GetSeniority();
+            Seniority = GetSeniority(startWage);
 
         }
         private double SetStartWage(double wage, int workHours)
@@ -40,20 +41,20 @@ namespace MaandelijksLoon
 
             return Math.Round(result,2);
         }
-        public double GetSeniority()
+        public double GetSeniority(double wage)
         {
             TimeSpan span = DateTime.Now - StartDate;
 
             int result = span.Days / 365;
 
-            double amount = StartWage;
+            double amount = wage;
 
             for (int i = 0; i < result; i++)
             {
                 amount += amount * 0.01;
             }
 
-            amount -= StartWage;
+            amount -= wage;
 
             return Math.Round(amount,2);
         }
@@ -79,25 +80,31 @@ namespace MaandelijksLoon
         {
             return Name;
         }
-        public virtual string ShowPaycheck()
+        public virtual void FillPaycheck()
         {
-            string paycheck = "";
-            Seniority = GetSeniority();
+            FullPaycheck = new Dictionary<string, double>();
 
-            paycheck += $"€ {StartWage:0.00}\n" +
-                        $"€ {Seniority}\n";
+            Seniority = GetSeniority(StartWage);
+
+            FullPaycheck.Add("Startloon", StartWage);
+            FullPaycheck.Add("Anciëniteit", Seniority);
 
             double result = StartWage + Seniority;
-            paycheck += $"€ {result}\n" +
-                        $"€ 200.00\n";
+            FullPaycheck.Add("AfterSeniority", result);
+            FullPaycheck.Add("Sociale Zekerheid", 200);
 
             result -= 200;
-            paycheck += $"€ {result}\n";
+            FullPaycheck.Add("AfterSocial", result);
+            FullPaycheck.Add("Bedrijfsvoorheffing", GetTaxes(result,0.1368));
 
+            result -= GetTaxes(result,0.1368);
+            FullPaycheck.Add("AfterTaxes", result);
+            FullPaycheck.Add("Nettoloon", result);
 
-
-
-            return paycheck;
+        }
+        public double GetTaxes(double wage, double percent)
+        {
+            return Math.Round(wage * percent,2);
         }
     }
 }

@@ -34,12 +34,13 @@
             this.gbWorkersList = new System.Windows.Forms.GroupBox();
             this.lblInfo = new System.Windows.Forms.Label();
             this.gbWorker = new System.Windows.Forms.GroupBox();
-            this.btnChange = new System.Windows.Forms.Button();
-            this.lblInfoName = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblWage = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblWage = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblInfoName = new System.Windows.Forms.Label();
+            this.btnChange = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.gbWorkersList.SuspendLayout();
             this.gbWorker.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +52,7 @@
             this.lbxWorkers.ItemHeight = 15;
             this.lbxWorkers.Location = new System.Drawing.Point(3, 17);
             this.lbxWorkers.Name = "lbxWorkers";
-            this.lbxWorkers.Size = new System.Drawing.Size(226, 214);
+            this.lbxWorkers.Size = new System.Drawing.Size(190, 214);
             this.lbxWorkers.TabIndex = 0;
             this.lbxWorkers.SelectedIndexChanged += new System.EventHandler(this.lbxWorkers_SelectedIndexChanged);
             // 
@@ -80,9 +81,9 @@
             this.gbWorkersList.Controls.Add(this.btnAddWorker);
             this.gbWorkersList.Controls.Add(this.btnRemove);
             this.gbWorkersList.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbWorkersList.Location = new System.Drawing.Point(12, 13);
+            this.gbWorkersList.Location = new System.Drawing.Point(12, 12);
             this.gbWorkersList.Name = "gbWorkersList";
-            this.gbWorkersList.Size = new System.Drawing.Size(232, 326);
+            this.gbWorkersList.Size = new System.Drawing.Size(196, 326);
             this.gbWorkersList.TabIndex = 3;
             this.gbWorkersList.TabStop = false;
             this.gbWorkersList.Text = "Werknemerslijst";
@@ -98,6 +99,7 @@
             // 
             // gbWorker
             // 
+            this.gbWorker.Controls.Add(this.btnSave);
             this.gbWorker.Controls.Add(this.label4);
             this.gbWorker.Controls.Add(this.label3);
             this.gbWorker.Controls.Add(this.lblWage);
@@ -106,40 +108,30 @@
             this.gbWorker.Controls.Add(this.btnChange);
             this.gbWorker.Controls.Add(this.lblInfo);
             this.gbWorker.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbWorker.Location = new System.Drawing.Point(250, 13);
+            this.gbWorker.Location = new System.Drawing.Point(214, 12);
             this.gbWorker.Name = "gbWorker";
             this.gbWorker.Size = new System.Drawing.Size(424, 327);
             this.gbWorker.TabIndex = 5;
             this.gbWorker.TabStop = false;
             this.gbWorker.Text = "naam werker";
             // 
-            // btnChange
+            // label4
             // 
-            this.btnChange.Location = new System.Drawing.Point(6, 288);
-            this.btnChange.Name = "btnChange";
-            this.btnChange.Size = new System.Drawing.Size(160, 31);
-            this.btnChange.TabIndex = 3;
-            this.btnChange.Text = "Pas gegevens aan...";
-            this.btnChange.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(156, 184);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(10, 15);
+            this.label4.TabIndex = 9;
+            this.label4.Text = ":";
             // 
-            // lblInfoName
+            // label3
             // 
-            this.lblInfoName.AutoSize = true;
-            this.lblInfoName.Location = new System.Drawing.Point(20, 18);
-            this.lblInfoName.Name = "lblInfoName";
-            this.lblInfoName.Size = new System.Drawing.Size(129, 135);
-            this.lblInfoName.TabIndex = 5;
-            this.lblInfoName.Text = "Naam\r\nGeslacht\r\nGeboortedatum\r\nRijsregisternummer\r\n\r\nDatum indiensttreding\r\nFunct" +
-    "ie\r\nTe presteren uren\r\nBedrijfswagen";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(156, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(10, 135);
-            this.label1.TabIndex = 6;
-            this.label1.Text = ":\r\n:\r\n:\r\n:\r\n\r\n:\r\n:\r\n:\r\n:\r\n";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(20, 184);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 15);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Startloon\r\n";
             // 
             // lblWage
             // 
@@ -151,29 +143,49 @@
             this.lblWage.Text = "startloon\r\n";
             this.lblWage.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // label3
+            // label1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 184);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 15);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Startloon\r\n";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(156, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(10, 135);
+            this.label1.TabIndex = 6;
+            this.label1.Text = ":\r\n:\r\n:\r\n:\r\n\r\n:\r\n:\r\n:\r\n:\r\n";
             // 
-            // label4
+            // lblInfoName
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(156, 184);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(10, 15);
-            this.label4.TabIndex = 9;
-            this.label4.Text = ":";
+            this.lblInfoName.AutoSize = true;
+            this.lblInfoName.Location = new System.Drawing.Point(20, 18);
+            this.lblInfoName.Name = "lblInfoName";
+            this.lblInfoName.Size = new System.Drawing.Size(129, 135);
+            this.lblInfoName.TabIndex = 5;
+            this.lblInfoName.Text = "Naam\r\nGeslacht\r\nGeboortedatum\r\nRijksregisternummer\r\n\r\nDatum indiensttreding\r\nFunc" +
+    "tie\r\nTe presteren uren\r\nBedrijfswagen";
+            // 
+            // btnChange
+            // 
+            this.btnChange.Location = new System.Drawing.Point(6, 288);
+            this.btnChange.Name = "btnChange";
+            this.btnChange.Size = new System.Drawing.Size(194, 31);
+            this.btnChange.TabIndex = 3;
+            this.btnChange.Text = "Pas gegevens aan...";
+            this.btnChange.UseVisualStyleBackColor = true;
+            this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(224, 287);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(194, 31);
+            this.btnSave.TabIndex = 10;
+            this.btnSave.Text = "Maak loonbrief op";
+            this.btnSave.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(686, 368);
+            this.ClientSize = new System.Drawing.Size(655, 348);
             this.Controls.Add(this.gbWorker);
             this.Controls.Add(this.gbWorkersList);
             this.Font = new System.Drawing.Font("Cambria", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -202,6 +214,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblWage;
+        private System.Windows.Forms.Button btnSave;
     }
 }
 

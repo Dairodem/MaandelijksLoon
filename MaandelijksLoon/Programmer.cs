@@ -23,7 +23,7 @@ namespace MaandelijksLoon
             else
                 haveCar = "Nee";
 
-            Seniority = GetSeniority();
+            Seniority = GetSeniority(StartWage);
 
             string info = "";
             info += $"{Name}\n" +
@@ -38,6 +38,35 @@ namespace MaandelijksLoon
 
 
             return info.ToUpper();
+        }
+
+        public override void FillPaycheck()
+        {
+            FullPaycheck = new Dictionary<string, double>();
+
+            Seniority = GetSeniority(StartWage);
+
+            FullPaycheck.Add("Startloon", StartWage);
+            FullPaycheck.Add("Anciëniteit", Seniority);
+
+            double result = StartWage + Seniority;
+            FullPaycheck.Add("AfterSeniority", result);
+            FullPaycheck.Add("Sociale Zekerheid", 200);
+
+            result -= 200;
+            FullPaycheck.Add("AfterSocial", result);
+            double percent = 0.1368;
+
+            if (HasCar)
+            {
+                percent = 0.1730;
+            }
+            FullPaycheck.Add("Bedrijfsvoorheffing", GetTaxes(result,percent));
+
+            result -= GetTaxes(result,percent);
+            FullPaycheck.Add("AfterTaxes", result);
+            FullPaycheck.Add("Nettoloon", result);
+
         }
     }
 }

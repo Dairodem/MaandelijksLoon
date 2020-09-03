@@ -21,7 +21,6 @@ namespace MaandelijksLoon
 
         };
         private string[] genderArray = new string[] { "Man","Vrouw" };
-        private string[] ageYears = new string[60];
 
         public string InputName;
         public string Function;

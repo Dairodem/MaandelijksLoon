@@ -12,10 +12,9 @@ namespace MaandelijksLoon
 {
     /*---------TODO---------------
      * 
-     * eff startloon tonen
-     * ancieniteit berekenen
-     * Soc zekerheid berkenen
-     * Bedrijfsvoorheffilg berekenen
+     * aanpassen van werknemer
+     * loonfiches opslaan naar text
+     * 
      * ...
      * fake files (history) from year *2019* else total
      * 
@@ -83,9 +82,15 @@ namespace MaandelijksLoon
                 Worker worker = (Worker)lbxWorkers.SelectedItem;
 
                 lblInfo.Text = worker.GetInfo();
-                lblWage.Text = worker.ShowPaycheck();
 
             }
+        }
+
+        private void btnChange_Click(object sender, EventArgs e)
+        {
+            FormAddWorker formChange = new FormAddWorker();
+            formChange.Text = "Werkgever aanpassen";
+            
         }
     }
 }
