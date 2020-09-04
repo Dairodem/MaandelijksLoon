@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.numMonth = new System.Windows.Forms.NumericUpDown();
@@ -65,6 +66,9 @@
             this.txtBaseWage = new System.Windows.Forms.TextBox();
             this.checkCar = new System.Windows.Forms.CheckBox();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.epName = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epLastName = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epIBAN = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.numMonth)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDay)).BeginInit();
@@ -73,6 +77,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numDayHired)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStartWage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numWorkHours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epLastName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epIBAN)).BeginInit();
             this.SuspendLayout();
             // 
             // txtLastName
@@ -505,11 +512,26 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // epName
+            // 
+            this.epName.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.epName.ContainerControl = this;
+            // 
+            // epLastName
+            // 
+            this.epLastName.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.epLastName.ContainerControl = this;
+            // 
+            // epIBAN
+            // 
+            this.epIBAN.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.epIBAN.ContainerControl = this;
+            // 
             // FormAddWorker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 331);
+            this.ClientSize = new System.Drawing.Size(580, 327);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.checkCar);
             this.Controls.Add(this.label17);
@@ -537,6 +559,7 @@
             this.Controls.Add(this.txtLastName);
             this.Font = new System.Drawing.Font("Cambria", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "FormAddWorker";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Werknemer Toevoegen";
@@ -551,6 +574,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numDayHired)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numStartWage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numWorkHours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epLastName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epIBAN)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -595,5 +621,8 @@
         private System.Windows.Forms.TextBox txtBaseWage;
         private System.Windows.Forms.CheckBox checkCar;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.ErrorProvider epName;
+        private System.Windows.Forms.ErrorProvider epLastName;
+        private System.Windows.Forms.ErrorProvider epIBAN;
     }
 }

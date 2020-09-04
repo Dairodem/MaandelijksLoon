@@ -38,7 +38,6 @@ namespace MaandelijksLoon
 
             return info.ToUpper();
         }
-
         public override void FillPaycheck()
         {
             FullPaycheck = new Dictionary<string, double>();

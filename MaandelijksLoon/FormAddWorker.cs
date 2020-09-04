@@ -33,7 +33,6 @@ namespace MaandelijksLoon
         public bool newWorker;
         public DateTime BirthDate;
         public DateTime StartDate;
-
         public Worker ChangeWorker;
 
 
@@ -125,6 +124,56 @@ namespace MaandelijksLoon
         {
             txtBaseWage.Text = GetWage().ToString();
         }
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            bool isError = false;
+
+            if (txtName.Text == "")
+            {
+                epName.SetError(txtName, "Geen naam ingevuld!");
+                isError = true;
+            }
+            else
+            {
+                epName.Clear();
+            }
+
+            if (txtLastName.Text == "")
+            {
+                epLastName.SetError(txtLastName, "Geen familienaam ingevuld!");
+                isError = true;
+            }
+            else
+            {
+                epLastName.Clear();
+            }
+
+            if (txtIban.Text == "")
+            {
+                epIBAN.SetError(txtIban, "Geen Rekeningnummer ingevuld!");
+                isError = true;
+            }
+            else
+            {
+                epIBAN.Clear();
+            }
+            if (!isError)
+            {
+                InputName = txtName.Text + " " + txtLastName.Text;
+                Function = cbFunction.Text;
+                Gender = cbGender.Text;
+                IBAN = "BE" + txtIban.Text;
+                SocialNr = txtDateSoc.Text + "-" + txtAppendSoc.Text;
+                StartWage = numStartWage.Value;
+                WorkHours = (int)numWorkHours.Value;
+                BirthDate = new DateTime(Convert.ToInt32(cbYear.Text), (int)numMonth.Value, (int)numDay.Value);
+                StartDate = new DateTime(Convert.ToInt32(cbYearHired.Text), (int)numMonthHired.Value, (int)numDayHired.Value);
+                HasCar = checkCar.Checked;
+
+                this.DialogResult = DialogResult.OK;
+
+            }
+        }
 
         private decimal GetWage()
         {
@@ -194,21 +243,6 @@ namespace MaandelijksLoon
 
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            InputName = txtName.Text + " " + txtLastName.Text;
-            Function = cbFunction.Text;
-            Gender = cbGender.Text;
-            IBAN = "BE" + txtIban.Text;
-            SocialNr = txtDateSoc.Text + "-" + txtAppendSoc.Text;
-            StartWage = numStartWage.Value;
-            WorkHours = (int)numWorkHours.Value;
-            BirthDate = new DateTime(Convert.ToInt32(cbYear.Text),(int)numMonth.Value,(int)numDay.Value);
-            StartDate = new DateTime(Convert.ToInt32(cbYearHired.Text), (int)numMonthHired.Value, (int)numDayHired.Value);
-            HasCar = checkCar.Checked;
-
-            this.DialogResult = DialogResult.OK;
-        }
 
     }
 }

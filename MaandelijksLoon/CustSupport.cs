@@ -12,6 +12,13 @@ namespace MaandelijksLoon
         {
             Function = "Customer Support";
         }
+        private double ReturnEducation(double wage)
+        {
+            FullPaycheck.Add("Opleiding", 19.50);
+            FullPaycheck.Add("AfterEduc", wage + 19.50);
+
+            return wage + 19.50;
+        }
         public override void FillPaycheck()
         {
             FullPaycheck = new Dictionary<string, double>();
@@ -39,13 +46,6 @@ namespace MaandelijksLoon
             result = ReturnEducation(result);
             FullPaycheck.Add("Nettoloon", result);
 
-        }
-        private double ReturnEducation(double wage)
-        {
-            FullPaycheck.Add("Opleiding", 19.50);
-            FullPaycheck.Add("AfterEduc", wage+ 19.50);
-
-            return wage + 19.50;
         }
     }
 }

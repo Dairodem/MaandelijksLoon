@@ -34,12 +34,13 @@
             this.gbWorkersList = new System.Windows.Forms.GroupBox();
             this.lblInfo = new System.Windows.Forms.Label();
             this.gbWorker = new System.Windows.Forms.GroupBox();
+            this.btnSave = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblInfoName = new System.Windows.Forms.Label();
             this.btnChange = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.btnSaveAll = new System.Windows.Forms.Button();
             this.checkRecap = new System.Windows.Forms.CheckBox();
+            this.btnRecap = new System.Windows.Forms.Button();
             this.gbWorkersList.SuspendLayout();
             this.gbWorker.SuspendLayout();
             this.SuspendLayout();
@@ -57,9 +58,9 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(19, 240);
+            this.btnRemove.Location = new System.Drawing.Point(6, 240);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(160, 31);
+            this.btnRemove.Size = new System.Drawing.Size(184, 31);
             this.btnRemove.TabIndex = 1;
             this.btnRemove.Text = "Verwijder werknemer";
             this.btnRemove.UseVisualStyleBackColor = true;
@@ -67,9 +68,9 @@
             // 
             // btnAddWorker
             // 
-            this.btnAddWorker.Location = new System.Drawing.Point(18, 287);
+            this.btnAddWorker.Location = new System.Drawing.Point(6, 287);
             this.btnAddWorker.Name = "btnAddWorker";
-            this.btnAddWorker.Size = new System.Drawing.Size(160, 31);
+            this.btnAddWorker.Size = new System.Drawing.Size(184, 31);
             this.btnAddWorker.TabIndex = 2;
             this.btnAddWorker.Text = "Voeg werknemer toe...";
             this.btnAddWorker.UseVisualStyleBackColor = true;
@@ -112,6 +113,18 @@
             this.gbWorker.TabIndex = 5;
             this.gbWorker.TabStop = false;
             // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnSave.BackColor = System.Drawing.Color.FloralWhite;
+            this.btnSave.Location = new System.Drawing.Point(224, 191);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(194, 31);
+            this.btnSave.TabIndex = 10;
+            this.btnSave.Text = "Maak loonbrief op";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -143,22 +156,10 @@
             this.btnChange.UseVisualStyleBackColor = false;
             this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
             // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnSave.BackColor = System.Drawing.Color.FloralWhite;
-            this.btnSave.Location = new System.Drawing.Point(224, 191);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(194, 31);
-            this.btnSave.TabIndex = 10;
-            this.btnSave.Text = "Maak loonbrief op";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // btnSaveAll
             // 
             this.btnSaveAll.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnSaveAll.Location = new System.Drawing.Point(438, 299);
+            this.btnSaveAll.Location = new System.Drawing.Point(438, 252);
             this.btnSaveAll.Name = "btnSaveAll";
             this.btnSaveAll.Size = new System.Drawing.Size(194, 31);
             this.btnSaveAll.TabIndex = 11;
@@ -169,23 +170,37 @@
             // checkRecap
             // 
             this.checkRecap.AutoSize = true;
-            this.checkRecap.Location = new System.Drawing.Point(449, 275);
+            this.checkRecap.Location = new System.Drawing.Point(271, 260);
             this.checkRecap.Name = "checkRecap";
             this.checkRecap.Size = new System.Drawing.Size(161, 18);
             this.checkRecap.TabIndex = 12;
             this.checkRecap.Text = "Voeg maandelijkse kost bij";
             this.checkRecap.UseVisualStyleBackColor = true;
             // 
+            // btnRecap
+            // 
+            this.btnRecap.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnRecap.Location = new System.Drawing.Point(438, 298);
+            this.btnRecap.Name = "btnRecap";
+            this.btnRecap.Size = new System.Drawing.Size(194, 31);
+            this.btnRecap.TabIndex = 13;
+            this.btnRecap.Text = "Maak kostenbrief op";
+            this.btnRecap.UseVisualStyleBackColor = true;
+            this.btnRecap.Click += new System.EventHandler(this.btnRecap_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(655, 348);
+            this.ClientSize = new System.Drawing.Size(655, 347);
+            this.Controls.Add(this.btnRecap);
             this.Controls.Add(this.checkRecap);
             this.Controls.Add(this.btnSaveAll);
             this.Controls.Add(this.gbWorker);
             this.Controls.Add(this.gbWorkersList);
             this.Font = new System.Drawing.Font("Cambria", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Maandelijkse Lonen";
@@ -212,6 +227,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnSaveAll;
         private System.Windows.Forms.CheckBox checkRecap;
+        private System.Windows.Forms.Button btnRecap;
     }
 }
 

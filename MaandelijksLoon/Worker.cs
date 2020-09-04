@@ -58,6 +58,10 @@ namespace MaandelijksLoon
 
             return Math.Round(amount,2);
         }
+        public double GetTaxes(double wage, double percent)
+        {
+            return Math.Round(wage * percent, 2);
+        }
         public virtual string GetInfo()
         {
             string info = "";
@@ -75,10 +79,6 @@ namespace MaandelijksLoon
 
             return info.ToUpper();
         }
-        public override string ToString()
-        {
-            return Name;
-        }
         public virtual void FillPaycheck()
         {
             FullPaycheck = new Dictionary<string, double>();
@@ -90,7 +90,7 @@ namespace MaandelijksLoon
             double result = StartWage + Seniority;
             if (result != StartWage)
             {
-                FullPaycheck.Add("Anciëniteit", Seniority);
+                FullPaycheck.Add("Anciënniteit", Seniority);
                 FullPaycheck.Add("AfterSeniority", result);
 
             }
@@ -99,16 +99,16 @@ namespace MaandelijksLoon
 
             result -= 200;
             FullPaycheck.Add("AfterSocial", result);
-            FullPaycheck.Add("Bedrijfsvoorheffing", GetTaxes(result,0.1368));
+            FullPaycheck.Add("Bedrijfsvoorheffing", GetTaxes(result, 0.1368));
 
-            result -= GetTaxes(result,0.1368);
+            result -= GetTaxes(result, 0.1368);
             FullPaycheck.Add("AfterTaxes", result);
             FullPaycheck.Add("Nettoloon", result);
 
         }
-        public double GetTaxes(double wage, double percent)
+        public override string ToString()
         {
-            return Math.Round(wage * percent,2);
+            return Name;
         }
     }
 }
