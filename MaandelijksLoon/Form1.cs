@@ -24,7 +24,7 @@ namespace MaandelijksLoon
     public partial class Form1 : Form
     {
         public List<Worker> WorkersList = new List<Worker>();
-        public string Name;
+        public Worker currentWorker;
 
         public Form1()
         {
@@ -53,27 +53,26 @@ namespace MaandelijksLoon
                 switch (formAddWorker.Function)
                 {
                     case "Programmeur":
-                        WorkersList.Add(new Programmer(formAddWorker.SocialNr, formAddWorker.InputName, formAddWorker.Gender, formAddWorker.IBAN, 
+                        WorkersList.Add(new Programmer(formAddWorker.SocialNr, formAddWorker.InputName, formAddWorker.Gender, formAddWorker.IBAN,
                                             formAddWorker.BirthDate, formAddWorker.StartDate, (double)formAddWorker.StartWage, formAddWorker.WorkHours, formAddWorker.HasCar));
                         break;
 
                     case "IT-Support":
-                        WorkersList.Add(new ITSupport(formAddWorker.SocialNr, formAddWorker.InputName, formAddWorker.Gender, formAddWorker.IBAN, 
+                        WorkersList.Add(new ITSupport(formAddWorker.SocialNr, formAddWorker.InputName, formAddWorker.Gender, formAddWorker.IBAN,
                                             formAddWorker.BirthDate, formAddWorker.StartDate, (double)formAddWorker.StartWage, formAddWorker.WorkHours));
                         break;
 
                     case "Customer Support":
-                        WorkersList.Add(new CustSupport(formAddWorker.SocialNr, formAddWorker.InputName, formAddWorker.Gender, formAddWorker.IBAN, 
+                        WorkersList.Add(new CustSupport(formAddWorker.SocialNr, formAddWorker.InputName, formAddWorker.Gender, formAddWorker.IBAN,
                                             formAddWorker.BirthDate, formAddWorker.StartDate, (double)formAddWorker.StartWage, formAddWorker.WorkHours));
                         break;
 
                     case "Standaard":
                     default:
-                        WorkersList.Add(new Worker(formAddWorker.SocialNr, formAddWorker.InputName, formAddWorker.Gender, formAddWorker.IBAN, 
+                        WorkersList.Add(new Worker(formAddWorker.SocialNr, formAddWorker.InputName, formAddWorker.Gender, formAddWorker.IBAN,
                                             formAddWorker.BirthDate, formAddWorker.StartDate, (double)formAddWorker.StartWage, formAddWorker.WorkHours));
                         break;
                 }
-
                 lbxWorkers.DataSource = null;
                 lbxWorkers.DataSource = WorkersList;
             }
@@ -93,23 +92,55 @@ namespace MaandelijksLoon
         private void btnChange_Click(object sender, EventArgs e)
         {
             FormAddWorker formChange = new FormAddWorker();
-            formChange.Text = "Werkgever aanpassen";
-            formChange.newWorker = false;
+            currentWorker = (Worker)lbxWorkers.SelectedItem;
 
-            Worker worker = (Worker)lbxWorkers.SelectedItem;
+            formChange.Text = $"Gegevens aanpassen van {currentWorker.Name}";
+            formChange.newWorker = false;
+            formChange.ChangeWorker = currentWorker;
+
             if (formChange.ShowDialog() == DialogResult.OK)
             {
+                RemoveWorker(currentWorker);
+
+                switch (formChange.Function)
+                {
+                    case "Programmeur":
+                        WorkersList.Add(new Programmer(formChange.SocialNr, formChange.InputName, formChange.Gender, formChange.IBAN,
+                                            formChange.BirthDate, formChange.StartDate, (double)formChange.StartWage, formChange.WorkHours, formChange.HasCar));
+                        break;
+
+                    case "IT-Support":
+                        WorkersList.Add(new ITSupport(formChange.SocialNr, formChange.InputName, formChange.Gender, formChange.IBAN,
+                                            formChange.BirthDate, formChange.StartDate, (double)formChange.StartWage, formChange.WorkHours));
+                        break;
+
+                    case "Customer Support":
+                        WorkersList.Add(new CustSupport(formChange.SocialNr, formChange.InputName, formChange.Gender, formChange.IBAN,
+                                            formChange.BirthDate, formChange.StartDate, (double)formChange.StartWage, formChange.WorkHours));
+                        break;
+
+                    case "Standaard":
+                    default:
+                        WorkersList.Add(new Worker(formChange.SocialNr, formChange.InputName, formChange.Gender, formChange.IBAN,
+                                            formChange.BirthDate, formChange.StartDate, (double)formChange.StartWage, formChange.WorkHours));
+                        break;
+                }
 
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string folder = $"Loonbrieven {DateTime.Now.AddMonths(-1).ToString("MMMM yyyy")}";
+            Worker currWorker = (Worker)lbxWorkers.SelectedItem;
+            CreatePaycheck(currWorker);
+        }
+        private void CreatePaycheck(Worker worker)
+        {
+            string folder = $"LOONBRIEVEN {DateTime.Now.AddMonths(-1).ToString("MMMM yyyy")}";
+            string sign = " ";
 
             Directory.CreateDirectory(folder);
 
-            Worker worker = (Worker)lbxWorkers.SelectedItem;
             worker.FillPaycheck();
 
             using (StreamWriter writer = new StreamWriter($"{folder}/LOONBRIEF {worker.Name.ToUpper()} {worker.SocialNr} {DateTime.Now.AddMonths(-1).ToString("MM-yyyy")}.txt"))
@@ -117,38 +148,39 @@ namespace MaandelijksLoon
                 writer.WriteLine("────────────────────────────────────────────────");
                 writer.WriteLine($"LOONBRIEF {DateTime.Now.AddMonths(-1).ToString("MMMM yyyy").ToUpper()}");
                 writer.WriteLine("────────────────────────────────────────────────");
-                writer.WriteLine(StringFormat("NAAM")                   + $": {worker.Name.ToUpper()}");
-                writer.WriteLine(StringFormat("GESLACHT")               + $": {worker.Gender.ToUpper()}");
-                writer.WriteLine(StringFormat("GEBOORTEDATUM")          + $": {worker.BirthDate.ToString("dd MMMM yyyy").ToUpper()}");
-                writer.WriteLine(StringFormat("RIJKSREGISTERNUMMER")    + $": {worker.SocialNr}");
-                writer.WriteLine(StringFormat("DATUM INDIENSTTREDING")  + $": {worker.StartDate.ToString("dd MMMM yyyy").ToUpper()}");
-                writer.WriteLine(StringFormat("FUNCTIE")                + $": {worker.Function.ToUpper()}");
-                writer.WriteLine(StringFormat("TE PRESTEREN UREN")      + $": {worker.WorkHours} /38");
+                writer.WriteLine(StringFormat("NAAM") + $": {worker.Name.ToUpper()}");
+                writer.WriteLine(StringFormat("GESLACHT") + $": {worker.Gender.ToUpper()}");
+                writer.WriteLine(StringFormat("GEBOORTEDATUM") + $": {worker.BirthDate.ToString("dd MMMM yyyy").ToUpper()}");
+                writer.WriteLine(StringFormat("RIJKSREGISTERNUMMER") + $": {worker.SocialNr}");
+                writer.WriteLine(StringFormat("DATUM INDIENSTTREDING") + $": {worker.StartDate.ToString("dd MMMM yyyy").ToUpper()}");
+                writer.WriteLine(StringFormat("FUNCTIE") + $": {worker.Function.ToUpper()}");
+                writer.WriteLine(StringFormat("TE PRESTEREN UREN") + $": {worker.WorkHours} /38");
 
                 if (worker is Programmer)
                 {
                     Programmer temp = (Programmer)worker;
-                    writer.WriteLine(StringFormat("BEDRIJFSWAGEN")      + $": {temp.HaveCar}");
+                    writer.WriteLine(StringFormat("BEDRIJFSWAGEN") + $": {temp.HaveCar}");
 
                 }
                 writer.WriteLine("────────────────────────────────────────────────");
-                foreach (KeyValuePair<string,double> pair in worker.FullPaycheck)
+
+                foreach (KeyValuePair<string, double> pair in worker.FullPaycheck)
                 {
                     if (!pair.Key.Contains("After"))
                     {
-                        writer.WriteLine(StringFormat(pair.Key)             + $": € {pair.Value}");
+                        writer.WriteLine(StringFormat(pair.Key.ToUpper()) + $": {sign} € {NumberFormat(pair.Value)}");
                     }
                     else
                     {
-                        writer.WriteLine(StringFormat(" ")                  + $"  € {pair.Value}");
+                        writer.WriteLine(StringFormat(" ")                + $"  {sign} € {NumberFormat(pair.Value)}");
                     }
                 }
                 writer.WriteLine("────────────────────────────────────────────────");
 
             }
 
-        }
 
+        }
         private string StringFormat(string str)
         {
             int space = 22 - str.Length;
@@ -159,6 +191,84 @@ namespace MaandelijksLoon
             }
 
             return str;
+        }
+
+        private string NumberFormat(double number)
+        {
+            string str = number.ToString("0.00");
+            string whitespace = "";
+            int space = 8 - str.Length;
+
+            for (int i = 0; i < space; i++)
+            {
+                whitespace += " ";
+            }
+
+            return whitespace + str;
+        }
+
+        private void btnSaveAll_Click(object sender, EventArgs e)
+        {
+            foreach (Worker worker in WorkersList)
+            {
+                CreatePaycheck(worker);
+            }
+            if (checkRecap.Checked)
+            {
+                CreateRecap();
+            }
+        }
+        private void CreateRecap()
+        {
+            double totalWages = 0;
+            double totalEduc = 0;
+            double totalHome = 0;
+
+            foreach (Worker worker in WorkersList)
+            {
+                foreach (KeyValuePair<string, double> pair in worker.FullPaycheck)
+                {
+                    switch (pair.Key)
+                    {
+                        case "Startloon":
+                            totalWages += pair.Value;
+                            break;
+
+                        case "Opleiding":
+                            totalEduc += pair.Value;
+                            break;
+
+                        case "Thuiswerk":
+                            totalHome += pair.Value;
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+
+            }
+
+            string folder = $"LOONKOST {DateTime.Now.AddMonths(-1).ToString("MMMM yyyy")}";
+
+            Directory.CreateDirectory(folder);
+            using (StreamWriter writer = new StreamWriter($"{folder}/LOONKOST {DateTime.Now.AddMonths(-1).ToString("MM-yyyy")}.txt"))
+            {
+                writer.WriteLine("────────────────────────────────────────────────");
+                writer.WriteLine($"LOONKOST {DateTime.Now.AddMonths(-1).ToString("MMMM yyyy").ToUpper()}");
+                writer.WriteLine("────────────────────────────────────────────────");
+
+            }
+        }
+        private void RemoveWorker(Worker worker)
+        {
+            WorkersList.Remove(worker);
+        }
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            RemoveWorker((Worker)lbxWorkers.SelectedItem);
+            lbxWorkers.DataSource = null;
+            lbxWorkers.DataSource = WorkersList;
         }
     }
 }

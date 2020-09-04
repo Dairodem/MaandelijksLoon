@@ -34,6 +34,8 @@ namespace MaandelijksLoon
         public DateTime BirthDate;
         public DateTime StartDate;
 
+        public Worker ChangeWorker;
+
 
         public FormAddWorker()
         {
@@ -42,10 +44,6 @@ namespace MaandelijksLoon
 
         private void FormAddWorker_Load(object sender, EventArgs e)
         {
-            if (!newWorker)
-            {
-                btnAdd.Text = "Pas gegevens aan";
-            }
             FillYearsComboBox(cbYear, 1950, DateTime.Now.Year - 1950);
             FillYearsComboBox(cbYearHired, 1950 , DateTime.Now.Year - 1948);
 
@@ -60,6 +58,11 @@ namespace MaandelijksLoon
 
             cbGender.Items.AddRange(genderArray);
             cbGender.SelectedIndex = 0;
+            if (!newWorker)
+            {
+                btnAdd.Text = "Pas Gegevens aan";
+                GetWorkerInfo();
+            }
 
             numDayHired.Value = DateTime.Now.Day;
             numMonthHired.Value = DateTime.Now.Month;
@@ -90,7 +93,18 @@ namespace MaandelijksLoon
             }
             else
             {
+                checkCar.Checked = false;
                 checkCar.Enabled = false;
+            }
+
+            if (cbFunction.SelectedIndex == 2)
+            {
+                numWorkHours.Value = 38;
+                numWorkHours.Enabled = false;
+            }
+            else
+            {
+                numWorkHours.Enabled = true;
             }
 
             foreach (KeyValuePair<string,decimal> function in functionsToWages)
@@ -148,6 +162,37 @@ namespace MaandelijksLoon
                 year++;
             }
         }
+        private void GetWorkerInfo()
+        {
+            foreach (KeyValuePair<string, decimal> function in functionsToWages)
+            {
+                if (ChangeWorker.Function == function.Key)
+                {
+                    cbFunction.SelectedIndex =  functionsToWages.Keys.ToList().IndexOf(function.Key);
+                }
+            }
+            cbGender.SelectedItem = ChangeWorker.Gender;
+            txtName.Text = ChangeWorker.Name.Substring(0,ChangeWorker.Name.IndexOf(' '));
+            txtLastName.Text = ChangeWorker.Name.Substring(ChangeWorker.Name.IndexOf(' ')+1);
+            numDay.Value = ChangeWorker.BirthDate.Day;
+            numMonth.Value = ChangeWorker.BirthDate.Month;
+            cbYear.SelectedItem = ChangeWorker.BirthDate.Year.ToString();
+            txtAppendSoc.Text = ChangeWorker.SocialNr.Substring(ChangeWorker.SocialNr.IndexOf('-') + 1);
+            txtIban.Text = ChangeWorker.Iban.Substring(2);
+            numWorkHours.Value = ChangeWorker.WorkHours;
+
+            if (ChangeWorker is Programmer)
+            {
+                Programmer temp = (Programmer)ChangeWorker;
+                checkCar.Checked = temp.HasCar;
+            }
+            numDayHired.Value = ChangeWorker.StartDate.Day;
+            numMonthHired.Value = ChangeWorker.StartDate.Month;
+            cbYearHired.SelectedItem = ChangeWorker.StartDate.Year.ToString();
+
+            gbHired.Enabled = false;
+
+        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -165,9 +210,5 @@ namespace MaandelijksLoon
             this.DialogResult = DialogResult.OK;
         }
 
-        private string ReturnString()
-        {
-            return "";
-        }
     }
 }

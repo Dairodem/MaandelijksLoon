@@ -11,6 +11,7 @@ namespace MaandelijksLoon
         public ITSupport(string socialNr, string name, string gender, string iban, DateTime birthDate, DateTime startDate, double startWage, int workHours) : base(socialNr, name, gender, iban, birthDate, startDate, startWage, workHours)
         {
             Function = "IT-Support";
+            WorkHours = 38;
         }
         public override void FillPaycheck()
         {
@@ -20,10 +21,13 @@ namespace MaandelijksLoon
             FullPaycheck.Add("Startloon", StartWage);
             double reduction = StartWage * 0.06;
             Seniority = GetSeniority(StartWage - reduction);
-            FullPaycheck.Add("Anciëniteit", Seniority);
-
             double result = StartWage + Seniority;
-            FullPaycheck.Add("AfterSeniority", result);
+            if (result != StartWage)
+            {
+                FullPaycheck.Add("Anciëniteit", Seniority);
+                FullPaycheck.Add("AfterSeniority", result);
+
+            }
             FullPaycheck.Add("Sociale Zekerheid", 200);
 
             result -= 200;

@@ -70,8 +70,7 @@ namespace MaandelijksLoon
                     $"{StartDate:dd MMMM yyyy}\n" +
                     $"{Function}\n" +
                     $"{WorkHours}/38\n" +
-                    $"\n" +
-                    $"{Seniority}";
+                    $"\n";
 
 
             return info.ToUpper();
@@ -87,11 +86,16 @@ namespace MaandelijksLoon
             Seniority = GetSeniority(StartWage);
 
             FullPaycheck.Add("Startloon", StartWage);
-            FullPaycheck.Add("Anciëniteit", Seniority);
 
             double result = StartWage + Seniority;
-            FullPaycheck.Add("AfterSeniority", result);
-            FullPaycheck.Add("Sociale Zekerheid", 200);
+            if (result != StartWage)
+            {
+                FullPaycheck.Add("Anciëniteit", Seniority);
+                FullPaycheck.Add("AfterSeniority", result);
+
+            }
+
+            FullPaycheck.Add("Sociale Zekerheid", 200.00d);
 
             result -= 200;
             FullPaycheck.Add("AfterSocial", result);
