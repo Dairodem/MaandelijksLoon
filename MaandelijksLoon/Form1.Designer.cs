@@ -180,6 +180,7 @@
             this.btnSave.TabIndex = 10;
             this.btnSave.Text = "Maak loonbrief op";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // Form1
             // 

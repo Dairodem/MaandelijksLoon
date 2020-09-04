@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,12 +17,14 @@ namespace MaandelijksLoon
      * loonfiches opslaan naar text
      * 
      * ...
-     * fake files (history) from year *2019* else total
+     * maanden naar het nederlands?
      * 
      */
+
     public partial class Form1 : Form
     {
         public List<Worker> WorkersList = new List<Worker>();
+        public string Name;
 
         public Form1()
         {
@@ -43,6 +46,7 @@ namespace MaandelijksLoon
         private void btnAddWorker_Click(object sender, EventArgs e)
         {
             FormAddWorker formAddWorker = new FormAddWorker();
+            formAddWorker.newWorker = true;
 
             if (formAddWorker.ShowDialog() == DialogResult.OK)
             {
@@ -90,7 +94,71 @@ namespace MaandelijksLoon
         {
             FormAddWorker formChange = new FormAddWorker();
             formChange.Text = "Werkgever aanpassen";
-            
+            formChange.newWorker = false;
+
+            Worker worker = (Worker)lbxWorkers.SelectedItem;
+            if (formChange.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            string folder = $"Loonbrieven {DateTime.Now.AddMonths(-1).ToString("MMMM yyyy")}";
+
+            Directory.CreateDirectory(folder);
+
+            Worker worker = (Worker)lbxWorkers.SelectedItem;
+            worker.FillPaycheck();
+
+            using (StreamWriter writer = new StreamWriter($"{folder}/LOONBRIEF {worker.Name.ToUpper()} {worker.SocialNr} {DateTime.Now.AddMonths(-1).ToString("MM-yyyy")}.txt"))
+            {
+                writer.WriteLine("────────────────────────────────────────────────");
+                writer.WriteLine($"LOONBRIEF {DateTime.Now.AddMonths(-1).ToString("MMMM yyyy").ToUpper()}");
+                writer.WriteLine("────────────────────────────────────────────────");
+                writer.WriteLine(StringFormat("NAAM")                   + $": {worker.Name.ToUpper()}");
+                writer.WriteLine(StringFormat("GESLACHT")               + $": {worker.Gender.ToUpper()}");
+                writer.WriteLine(StringFormat("GEBOORTEDATUM")          + $": {worker.BirthDate.ToString("dd MMMM yyyy").ToUpper()}");
+                writer.WriteLine(StringFormat("RIJKSREGISTERNUMMER")    + $": {worker.SocialNr}");
+                writer.WriteLine(StringFormat("DATUM INDIENSTTREDING")  + $": {worker.StartDate.ToString("dd MMMM yyyy").ToUpper()}");
+                writer.WriteLine(StringFormat("FUNCTIE")                + $": {worker.Function.ToUpper()}");
+                writer.WriteLine(StringFormat("TE PRESTEREN UREN")      + $": {worker.WorkHours} /38");
+
+                if (worker is Programmer)
+                {
+                    Programmer temp = (Programmer)worker;
+                    writer.WriteLine(StringFormat("BEDRIJFSWAGEN")      + $": {temp.HaveCar}");
+
+                }
+                writer.WriteLine("────────────────────────────────────────────────");
+                foreach (KeyValuePair<string,double> pair in worker.FullPaycheck)
+                {
+                    if (!pair.Key.Contains("After"))
+                    {
+                        writer.WriteLine(StringFormat(pair.Key)             + $": € {pair.Value}");
+                    }
+                    else
+                    {
+                        writer.WriteLine(StringFormat(" ")                  + $"  € {pair.Value}");
+                    }
+                }
+                writer.WriteLine("────────────────────────────────────────────────");
+
+            }
+
+        }
+
+        private string StringFormat(string str)
+        {
+            int space = 22 - str.Length;
+
+            for (int i = 0; i < space; i++)
+            {
+                str += " ";
+            }
+
+            return str;
         }
     }
 }

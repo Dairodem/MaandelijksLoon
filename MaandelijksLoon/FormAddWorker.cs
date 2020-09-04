@@ -30,6 +30,7 @@ namespace MaandelijksLoon
         public decimal StartWage;
         public int WorkHours;
         public bool HasCar;
+        public bool newWorker;
         public DateTime BirthDate;
         public DateTime StartDate;
 
@@ -41,6 +42,10 @@ namespace MaandelijksLoon
 
         private void FormAddWorker_Load(object sender, EventArgs e)
         {
+            if (!newWorker)
+            {
+                btnAdd.Text = "Pas gegevens aan";
+            }
             FillYearsComboBox(cbYear, 1950, DateTime.Now.Year - 1950);
             FillYearsComboBox(cbYearHired, 1950 , DateTime.Now.Year - 1948);
 

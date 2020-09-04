@@ -8,8 +8,9 @@ namespace MaandelijksLoon
 {
     class Programmer : Worker
     {
-        public bool HasCar { get; set; } 
-        
+        public bool HasCar { get; set; }
+        public string HaveCar;
+
         public Programmer(string socialNr, string name, string gender, string iban, DateTime birthDate, DateTime startDate, double startWage, int workHours, bool hasCar) : base(socialNr,name, gender,iban,birthDate,startDate,startWage,workHours)
         {
             HasCar = hasCar;
@@ -17,11 +18,10 @@ namespace MaandelijksLoon
         }
         public override string GetInfo()
         {
-            string haveCar;
             if (HasCar)
-                haveCar = "Ja";
+                HaveCar = "Ja";
             else
-                haveCar = "Nee";
+                HaveCar = "Nee";
 
             Seniority = GetSeniority(StartWage);
 
@@ -33,7 +33,7 @@ namespace MaandelijksLoon
                     $"{StartDate:dd MMMM yyyy}\n" +
                     $"{Function}\n" +
                     $"{WorkHours}/38\n" +
-                    $"{haveCar}\n" +
+                    $"{HaveCar}\n" +
                     $"{Seniority}";
 
 
